@@ -1,4 +1,19 @@
-import { ISession } from "~~/types/ISession"
+import { ISession } from "@/types/ISession"
+import { IUser } from "@/types/IUser"
+
+export const useAuthCookie = () => useCookie('auth_token')
+
+
+export async function useUser(): Promise<IUser> {
+    const authCookie = useAuthCookie().value
+    const user = useState<IUser>('user')
+    
+    if (authCookie && !user.value) {
+        const { data } = await useFetch(`/api/auth/getByAuthToken`, {
+            headers: useRequestHeaders(['cookie'])
+        })
+    }
+}
 
 export async function registerWithEmail(username: string, name: string, email: string, password: string) {
     try {
