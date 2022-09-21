@@ -90,8 +90,8 @@
 </template>
 
 <script setup lang="ts">
-    import { registerWithEmail } from "~/composables/useAuth";
-    
+    import { registerWithEmail } from "@/composables/useAuth";
+    import { FormValidation } from "@/types/FormValidation";
     const email = ref(null);
     const password = ref(null);
     const username = ref(null);

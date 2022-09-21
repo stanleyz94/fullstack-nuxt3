@@ -1,4 +1,4 @@
-type FormValidation = {
+export type FormValidation = {
     hasErrors: boolean
     errors?: Map<string, { check: InputValidation; }>
    };

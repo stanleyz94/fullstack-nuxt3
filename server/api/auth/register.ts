@@ -1,26 +1,34 @@
 import { CompatibilityEvent, sendError } from 'h3'
 import { IUser } from '@/types/IUser'
 import bcrypt from 'bcrypt'
-import { doesUserExists } from '@/server/services/userService'
+import { validateUser } from '@/server/services/userService'
 import { createUser } from '@/server/db/repositories/userRepository'
 import { makeSession } from '@/server/services/sessionService'
+import { RegistrationRequest } from '@/types/IRegistration'
+
 
 export default async (event: CompatibilityEvent) => {
     const body = await useBody(event)
-    const { name, username, email, password } = body
-    const userExists = await doesUserExists(email, username)
-    if (userExists.value) {
-        sendError(event, createError({ statusCode: 422, statusMessage: userExists.message }))
+    const data = body.data as RegistrationRequest
+  
+    const validation = await validateUser(data)
+  
+    if (validation.hasErrors === true) {
+      const errors = JSON.stringify(Object.fromEntries(validation.errors))
+      return sendError(event, createError({ statusCode: 422, data: errors }))
     }
-
-    const encryptedPassword : string = await bcrypt.hash(password, 10) 
+  
+    const encryptedPassword: string = await bcrypt.hash(data.password, 10)
+  
     const userData: IUser = {
-        username,
-        name,
-        loginType: 'email',
-        password: encryptedPassword
+      username: data.username,
+      name: data.name,
+      email: data.email,
+      loginType: 'email',
+      password: encryptedPassword
     }
+  
     const user = await createUser(userData)
-
+  
     return await makeSession(user, event)
-}
+  }
