@@ -42,6 +42,8 @@ model Subscription {
   quantity      Int?
   trialEndsAt   Int?
   endsAt        Int?
+  startDate     Int
+  lastEventDate Int
 }
 
 model Question {
