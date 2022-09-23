@@ -1,7 +1,8 @@
 import { SubPostRes } from '@/types/SubPostRes'
 import { IUser } from '@/types/IUser'
 import Stripe from 'stripe'
-import { ISubscription } from '~~/types/ISubscription'
+import { ISubscription } from '@/types/ISubscription'
+import { createOrUpdateSubscription, getSubsriptionById, getUserByStripeCustomerId } from '../db/repositories/userRepository'
 
 
 const config = useRuntimeConfig()
@@ -38,11 +39,18 @@ export async function getSubscribeUrl(lookupKey: string, user: IUser): Promise<S
 
 
 export async function handleSubscriptionChange(subscription: Stripe.Subscription, lastEventDate: number) {
+    const localSubscription = await getSubsriptionById(subscription.id)
+
+    if (localSubscription?.lastEventDate > lastEventDate) {
+        return true
+    }
+    
+    
     const stripeCustomerId = subscription.customer as string
 
     const user = await getUserByStripeCustomerId(stripeCustomerId)
 
-    const data:ISubscription = {
+    const data = {
         userId: user.id,
         name: subscription.id,
         stripeId: subscription.id,
@@ -53,5 +61,9 @@ export async function handleSubscriptionChange(subscription: Stripe.Subscription
         endsAt: subscription.ended_at,
         startDate: subscription.start_date,
         lastEventDate
-    }
+    } as unknown as ISubscription
+
+    await createOrUpdateSubscription(data)
+
+    return true
 }

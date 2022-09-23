@@ -1,5 +1,5 @@
 import { IUser } from '@/types/IUser'
-export type SubPostRes = {
+export interface SubPostRes {
     url: string;
     user: IUser;
     shouldUpdateUser: boolean;

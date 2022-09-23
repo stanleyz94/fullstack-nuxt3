@@ -1,4 +1,4 @@
-export type ISubscription = {
+export interface ISubscription {
     id?: number
     userId: number
     stripeId: string
@@ -7,4 +7,6 @@ export type ISubscription = {
     quantity: number | null
     trialEndsAt: number | null
     endsAt: number | null
-  }
+    startDate: number | null
+    lastEventDate: number | null
+  } 
