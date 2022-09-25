@@ -34,9 +34,9 @@
                   Blog (coming soon)
                 </span>
               </nuxt-link>
-              <nuxt-link to="/ask-jack/search">
+              <nuxt-link to="/ask-question/search">
                 <span class="text-base font-medium text-gray-500 hover:text-gray-900">
-                  Ask Jack
+                  Ask Question
                 </span>
               </nuxt-link>
               <nuxt-link to="/dashboard">
@@ -97,9 +97,8 @@
 
 <script setup lang="ts">
     import BackButton from "~/components/elements/BackButton.vue";
-    import {useState} from "#app";
     const user = useState('user')
-    const setColorTheme = (newTheme: Theme) => {
+    const setColorTheme = (newTheme) => {
       useColorMode().preference = newTheme
     }
 </script>
