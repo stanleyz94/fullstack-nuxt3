@@ -24,12 +24,12 @@
                   Premium Membership
                 </span>
               </nuxt-link>
-              <nuxt-link to="/categories">
+              <nuxt-link to="/">
                 <span class="text-base font-medium text-gray-500 hover:text-gray-900">
                   Videos
                 </span>
               </nuxt-link>
-              <nuxt-link to="/blog">
+              <nuxt-link to="/">
                 <span class="text-base font-medium text-gray-500 hover:text-gray-900">
                   Blog (coming soon)
                 </span>

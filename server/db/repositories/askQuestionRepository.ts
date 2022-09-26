@@ -35,3 +35,45 @@ export async function createAnswer(data: IAnswerPost, authorId: number) {
     })
     
 }
+
+
+// export async function searchQuestions(query: string): Promise<IQuestion[]> {
+//     const result = await prisma.$queryRaw(Prisma.sql`SELECT Question.title, Question.description, User.name, User.username FROM Question INNER JOIN User ON Question.authorId=User.id WHERE title LIKE ${query} OR description LIKE ${query}`)
+//     return result as IQuestion[]
+// }
+type IQuestionWithAuthorUsername = (IQuestion & { author: { username: string }})[]
+
+export async function searchQuestions(query: string): Promise<IQuestionWithAuthorUsername> {
+    return await prisma.question.findMany({
+        where: {
+          OR: [
+            {
+              title: { contains: query },
+            },
+            {
+              description: { contains: query },
+            },
+          ],
+        },
+        include: {
+          answers: true,
+          author: {
+            select: {
+              username: true,
+            },
+          },
+        },
+      })
+}
+
+export async function editQuestion({ id, title, description }: IQuestionPost ) {
+    return await prisma.question.update({
+        where: {
+            id
+        },
+        data: {
+            title,
+            description
+        },
+    })
+}

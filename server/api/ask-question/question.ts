@@ -7,4 +7,5 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
     const questionId = parseInt(queries.id as string)
 
     return await findQuestion(questionId)
+    
 })

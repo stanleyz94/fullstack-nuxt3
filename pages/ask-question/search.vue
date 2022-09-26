@@ -18,7 +18,7 @@
     </div>
 </template>
  <script setup lang="ts">
-import QuestionBoard from '@/components/elements/QuestionForm.vue'
+import QuestionBoard from '@/components/elements/QuestionBoard.vue'
 import AskQuestionSideBar from '@/components/elements/AskQuestionSidebar.vue'
 definePageMeta({
     middleware: 'auth'
