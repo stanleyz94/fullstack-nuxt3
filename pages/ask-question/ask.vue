@@ -16,7 +16,7 @@
       <div class="md:w-1/3 z-1 flex justify-right relative"></div>
       <div v-if="true" class="w-full md:w-1/3 h-screen">
      
-       <QuestionForm />
+       <QuestionForm :data="data" :endpoint="endpoint"/>
       </div>
      </div>
     </div>
@@ -25,8 +25,17 @@
 <script setup lang="ts">
 import QuestionForm from '@/components/elements/QuestionForm.vue'
 import AskQuestionSidebar from '@/components/elements/AskQuestionSidebar.vue'
+import { IQuestionPost } from '@/types/IQuestionPost';
 
 definePageMeta({
     middleware: 'auth'
 })
+
+const data: IQuestionPost = reactive({
+    title: '',
+    description: ''
+  })
+  
+const endpoint = '/api/ask-question/ask'
+ 
 </script>

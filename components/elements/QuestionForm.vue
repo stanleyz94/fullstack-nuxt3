@@ -1,5 +1,5 @@
 <template>
-    <form @submit.preventDefault="postQuestion">
+    <form>
       <div class="mb-6">
         <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Short
           Description</label>
@@ -26,7 +26,6 @@
 <script setup lang="ts">
 import { IQuestionPost } from '@/types/IQuestionPost'
 import { IQuestion } from '@/types/IQuestion'
-
 definePageMeta({
     middleware: 'auth'
 })
@@ -38,24 +37,13 @@ interface Props {
 
 const props = defineProps<Props>()
 const data = props.data
-
+const emit = defineEmits(['closeEditForm'])
 const router = useRouter()
 
-// const data: IQuestionPost = reactive({
-//     title: '',
-//     description: ''
-// })
-
 const postQuestion = async () => {
-  const { data: question } = await useFetch<IQuestion>(() => `${props.endpoint}`, { method: 'POST', body: { data }, pick: ['id']})
-  router.push(`/ask-question/question/${question.value.id}`)
+  const { data: question } = await useFetch<IQuestion>(() => `${props.endpoint}`, { method: 'POST', body: { data }, pick: ['id'], key: data.title })
+    emit('closeEditForm')
+    router.push(`/ask-question/question/${question.value.id}`)
 }
-
-// const postQuestion = async () => {
-//     const { data: question } = await useFetch<IQuestion>(
-//         () => '/api/ask-question/ask', { method: 'POST', body: { data }, pick: ['id']}
-//     )
-//     router.push(`/ask-question/question/${question.value.id}`)
-// }
     
 </script>

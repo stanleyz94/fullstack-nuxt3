@@ -9,5 +9,9 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
     const questionId = data.id
 
     const question = await findQuestion(questionId)
+
+    question.description = data.description
+    question.title = data.title
+
     return await editQuestion(question)
 })

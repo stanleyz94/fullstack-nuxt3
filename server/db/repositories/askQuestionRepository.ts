@@ -77,3 +77,11 @@ export async function editQuestion({ id, title, description }: IQuestionPost ) {
         },
     })
 }
+
+export async function deleteQuestion({ id }: IQuestionPost ) {
+  return await prisma.question.delete({
+      where: {
+          id
+      },
+  })
+}

@@ -36,12 +36,12 @@
            </button>
           </div>
           
-          <QuestionForm :endpoint="editEndpoint" :data="question" v-if="showEditForm"/>
+          <QuestionForm @closeEditForm="closeEditForm" :endpoint="editEndpoint" :data="question" v-if="showEditForm"/>
    
          </div>
         </div>
        </div>
-       <div v-for="answer in question?.answers"
+       <div v-for="answer in question.answers"
         class="flex flex-column justify-center hover:scale-110 transition duration-500">
         <div class="max-w-xxl w-full p-4">
    
@@ -75,10 +75,10 @@ import { IQuestion } from '@/types/IQuestion';
 import AskQuestionSidebar from "~/components/elements/AskQuestionSidebar.vue";
 import AnswerForm from "~/components/elements/AnswerForm.vue";
 import QuestionForm from "~~/components/elements/QuestionForm.vue";
-
+// refactoring potrzebny!!!!!
 const route = useRoute()
 const router = useRouter()
-const questionId = route.params?.id
+const questionId = route.params?.id as string
 
 if (!questionId) {
     throw createError({ statusCode: 404, statusMessage: 'Page Not Found'})
@@ -86,14 +86,22 @@ if (!questionId) {
 
 const showEditForm = ref(false)
 const showDeleted = ref(false)
+const showAnswerForm = useState('showAnswerForm' + questionId, () => false)
 
-const question = await $fetch<IQuestion>(`/api/ask-question/question?id=${questionId}`)
-const me = await useUser()
-const isMine = question.authorId === me.id
-const editEndpoint = '/api/ask-question/edit-question' 
+const closeEditForm = () => showEditForm.value = false
+
+const getQuestion = async () => {
+    try {
+        return await $fetch<IQuestion>(`/api/ask-question/question?id=${questionId}`)
+    } catch(e) {
+        const statusCode = e.response?.status
+        const statusMessage = statusCode === 404 ? 'Page Not Found' : e.response?.statusText
+        throw createError({ statusCode, statusMessage })
+    }
+}
 
 const deleteQuestion = async () => {
-  const {data: deleted}  = await useFetch('/api/ask-question/delete-question', {
+  const { data: deleted }  = await useFetch('/api/ask-question/delete-question', {
    method: 'POST',
    body: { questionId }
   }) 
@@ -103,9 +111,17 @@ const deleteQuestion = async () => {
   })
 }
 
-
 const addAnswer = (answer: IAnswer) => {
-    question.value?.answers.push(answer)
+    question.answers.push(answer)
     showAnswerForm.value = false
 }
+
+
+const question = await getQuestion()        
+const me = await useUser()
+const isMine = question.authorId === me.id    
+const editEndpoint = '/api/ask-question/edit-question' 
+
+
+
 </script>
