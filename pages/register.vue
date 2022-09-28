@@ -1,6 +1,6 @@
     
 <template>
-        <div class="dark:bg-slate-800 h-screen">
+        <div class="dark:bg-black/95 h-screen">
           <div class="flex items-center justify-center px-4 sm:px-6 lg:px-8">
             <div class="max-w-md w-full">
               <div class="flex">
@@ -90,17 +90,20 @@
 </template>
 
 <script setup lang="ts">
-    import { registerWithEmail } from "@/composables/useAuth";
-    import { FormValidation } from "@/types/FormValidation";
+    import { registerWithEmail } from "@/composables/useAuth"
+    import { FormValidation } from "@/types/FormValidation"
+    import { v4 as uuidv4 } from 'uuid'
     const email = ref(null);
     const password = ref(null);
     const username = ref(null);
     const name = ref(null);
     const errors = ref(new Map())
     let response = ref<FormValidation>({ hasErrors: false })
+    const fetchKey = ref(``)
 
     async function postRegisterForm() {
-      response.value = await registerWithEmail(username.value, name.value, email.value, password.value);
+      fetchKey.value = uuidv4()
+      response.value = await registerWithEmail(username.value, name.value, email.value, password.value, fetchKey.value);
       errors.value = response.value.errors
     };
 

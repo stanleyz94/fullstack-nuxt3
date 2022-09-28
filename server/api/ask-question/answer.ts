@@ -1,4 +1,4 @@
-import { getUserBySessionToken } from "~~/server/services/sessionService"
+import { getUserBySessionToken } from "@/server/services/sessionService"
 import { IAnswerPost } from '@/types/IAnswerPost'
 import { createAnswer } from "@/server/db/repositories/askQuestionRepository"
 

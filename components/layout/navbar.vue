@@ -1,5 +1,5 @@
  <template>
-      <div class="navbar relative dark:bg-slate-800">
+      <div class="navbar relative dark:bg-black/95">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
           <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
             <div class="-mr-2 -my-2 md:hidden">
@@ -22,16 +22,6 @@
               <nuxt-link to="/subscribe">
                 <span class="text-base font-medium text-gray-500 hover:text-gray-900">
                   Premium Membership
-                </span>
-              </nuxt-link>
-              <nuxt-link to="/">
-                <span class="text-base font-medium text-gray-500 hover:text-gray-900">
-                  Videos
-                </span>
-              </nuxt-link>
-              <nuxt-link to="/">
-                <span class="text-base font-medium text-gray-500 hover:text-gray-900">
-                  Blog (coming soon)
                 </span>
               </nuxt-link>
               <nuxt-link to="/ask-question/search">
@@ -98,7 +88,7 @@
 <script setup lang="ts">
     import BackButton from "~/components/elements/BackButton.vue";
     const user = useState('user')
-    const setColorTheme = (newTheme) => {
+    const setColorTheme = (newTheme: string) => {
       useColorMode().preference = newTheme
     }
 </script>

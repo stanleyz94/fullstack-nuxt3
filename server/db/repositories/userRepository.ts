@@ -1,6 +1,6 @@
 import prisma from "@/server/db/client";
 import { IUser}  from '@/types/IUser';
-import { ISubscription } from "~~/types/ISubscription";
+import { ISubscription } from "@/types/ISubscription";
 
 export async function getUserByEmail(email: string): Promise<IUser> {
   return await prisma.user.findUnique({

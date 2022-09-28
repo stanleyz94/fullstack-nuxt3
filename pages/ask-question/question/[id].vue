@@ -1,7 +1,7 @@
 <template>
 
     <div
-     class=" min-h-full theme-mode bg-gradient-to-b from-white to-indigo-200 dark:bg-gradient-to-b dark:from-slate-800 dark:to-slate-600">
+     class=" min-h-full theme-mode from-white to-indigo-200 dark:bg-black/95">
      <div class="h-32 flex justify-center">
       <div class="flex m-5">
        <img class="mx-auto h-24 w-auto" src="/img/logo_clear_fsj.png" alt="full stack jack logo" />
@@ -14,12 +14,12 @@
       <AskQuestionSidebar />
       <div class="md:w-1/3 z-1 flex justify-right relative"></div>
       <div class="w-full md:w-1/3">
-       <div class="p-8 text-white bg-lime-600 dark:bg-slate-800 rounded shadow-md" v-if="showDeleted">
+       <div class="p-8 text-white bg-lime-600 dark:bg-black/95 rounded shadow-md" v-if="showDeleted">
         question deleted
        </div>
        <div v-if="question" class="flex flex-column justify-center hover:scale-110 transition duration-500">
         <div class="max-w-xxl w-full p-4">
-         <div class="p-8 bg-white dark:bg-slate-800 rounded shadow-md">
+         <div class="p-8 bg-white dark:bg-black/95 rounded shadow-md">
           <div class="flex justify-end dark:text-gray-300">
            {{ question.authName }}
           </div>

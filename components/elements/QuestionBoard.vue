@@ -24,7 +24,7 @@
 
         <Transition name="fade" v-if="!pending" v-for="question in questions">
             <NuxtLink v-if="question"
-                class="flex flex-column justify-center hover:scale-110 tranition duration-500"
+                class="flex flex-column justify-center hover:scale-110 transition duration-500"
                 :to="`/ask-question/question/${question.id}`">
                 <div class="max-w-xxl w-full p-4">
                     <div class="p-8 bg-white dark:bg-slate-800 rounded shadow-md">

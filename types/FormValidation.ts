@@ -3,7 +3,7 @@ export type FormValidation = {
     errors?: Map<string, { check: InputValidation; }>
    };
    
-   type FormErrors = {
+export type FormErrors = {
     field: string
     check: InputValidation
 }
