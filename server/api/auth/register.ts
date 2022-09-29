@@ -5,18 +5,19 @@ import { validateUser } from '@/server/services/userService'
 import { createUser } from '@/server/db/repositories/userRepository'
 import { makeSession } from '@/server/services/sessionService'
 import { RegistrationRequest } from '@/types/IRegistration'
+import { validateBody } from '@/server/utils'
+import { CreateUserInput, createUserSchema } from '@/server/schema/userSchema'
 
 
 export default async (event: CompatibilityEvent) => {
-    const body = await useBody(event)
-    const data = body.data as RegistrationRequest
+    const body = await validateBody<CreateUserInput>(event, createUserSchema)
+    const data = body.data
+    // const validation = await validateUser(data)
   
-    const validation = await validateUser(data)
-  
-    if (validation.hasErrors === true) {
-      const errors = JSON.stringify(Object.fromEntries(validation.errors))
-      return sendError(event, createError({ statusCode: 422, data: errors }))
-    }
+    // if (validation.hasErrors === true) {
+    //   const errors = JSON.stringify(Object.fromEntries(validation.errors))
+    //   return sendError(event, createError({ statusCode: 422, data: errors }))
+    // }
   
     const encryptedPassword: string = await bcrypt.hash(data.password, 10)
   

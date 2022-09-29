@@ -21,7 +21,8 @@
     "@vueuse/core": "^9.2.0",
     "bcrypt": "^5.0.1",
     "stripe": "^10.10.0",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "zod": "^3.19.1"
   },
   "prisma": {
     "schema": "server/db/schema.prisma"

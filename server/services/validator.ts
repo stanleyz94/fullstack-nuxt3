@@ -1,5 +1,36 @@
 import { RegistrationRequest } from '@/types/IRegistration'
 import { getUserByEmail, getUserByUserName } from '../db/repositories/userRepository'
+import { CreateUserInput } from '../schema/userSchema'
+
+export async function validate2({ username, email }: CreateUserInput['data']) {
+    
+    const userExistWithThatEmail = await getUserByEmail(email)
+    
+    if (userExistWithThatEmail) {
+        throw createError({ statusCode: 422, statusMessage: `This email, ${email}, is already registered!`, data: {
+            path: [
+                'data',
+                'email'
+            ],
+            message: `This email, ${email}, is already registered!`
+        } })
+    }
+
+    const userExistsWithThatUsername = await getUserByUserName(username)
+    
+    if (userExistsWithThatUsername) {
+        throw createError({ statusCode: 422, statusMessage: `The username, ${username}, is already registered!`, data: {
+            path: [
+                'data',
+                'username'
+            ],
+            message: `The username, ${username}, is already registered!`
+        } })
+
+    }
+}
+
+
 
 export async function validate(data: RegistrationRequest) {
 
