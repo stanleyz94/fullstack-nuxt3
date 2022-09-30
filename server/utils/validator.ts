@@ -1,4 +1,4 @@
-import { AnyZodObject } from "zod"
+import { AnyZodObject } from 'zod'
 import { CompatibilityEvent } from 'h3'
 
 export async function validateBody<T>(event: CompatibilityEvent, schema: AnyZodObject): Promise<T> {
