@@ -1,7 +1,7 @@
 <template>
 
     <div
-     class=" min-h-full theme-mode from-white to-teal-200 dark:bg-black/95">
+     class=" min-h-full theme-mode from-white to-green-200 dark:bg-black/95">
      <div class="h-32 flex justify-center">
       <div class="flex m-5">
        <img class="mx-auto h-24 w-auto" src="/img/logo_clear_fsj.png" alt="Question Board logo" />
@@ -19,7 +19,7 @@
        </div>
        <div v-if="question" class="flex flex-column justify-center">
         <div class="max-w-xxl w-full p-4">
-         <div class="p-8 bg-white dark:bg-slate-800 rounded shadow-md">
+         <div class="p-8 bg-white dark:bg-neutral-800 rounded shadow-md">
           <div class="flex justify-end dark:text-gray-300">
            {{ question.authName }}
           </div>
@@ -28,10 +28,10 @@
           <p class="dark:text-gray-300">{{ question.description }}</p>
           
           <div class="mt-5" v-if="isMine && showEditForm === false">
-           <button @click="showEditForm = true" class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">
+           <button @click="showEditForm = true" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Edit
            </button>
-            <button @click="deleteQuestion" class="bg-red-500 ml-3 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">
+            <button @click="deleteQuestion" class="bg-red-500 ml-3 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             delete
            </button>
           </div>
@@ -45,7 +45,7 @@
         class="flex flex-column justify-center">
         <div class="max-w-xxl w-full p-4">
    
-         <div class="p-8 bg-white dark:bg-slate-900 rounded shadow-md">
+         <div class="p-8 bg-white dark:bg-neutral-900 rounded shadow-md">
           <div class="flex justify-end dark:text-gray-300">
            {{ answer.authorName }}
           </div>
@@ -56,7 +56,7 @@
    
        <div class="flex justify-end">
         <button v-if="!showAnswerForm" @click="showAnswerForm = !showAnswerForm" type="button"
-         class="text-white bg-gradient-to-r from-teal-500 to-teal-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-teal-200 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+         class="text-white bg-gradient-to-r from-green-500 to-green-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
          Answer
         </button>
        </div>

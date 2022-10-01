@@ -29,7 +29,7 @@
             <div>
               <label for="name" class="sr-only">Name</label>
               <input v-model="registrationForm.name" id="name" name="name" required
-                class="appearance-none dark:bg-slate-500 dark:text-white dark:placeholder-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                class="appearance-none dark:bg-neutral-500 dark:text-white dark:placeholder-white rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
                 :class="v$.name.$errors.length ? ' border-red-500' : ''" placeholder="Name" />
             </div>
           </div>
@@ -37,7 +37,7 @@
             <div>
               <label for="username" class="sr-only">Username</label>
               <input v-model="registrationForm.username" id="username" name="username" required
-                class="dark:bg-slate-500 dark:text-white dark:placeholder-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                class="dark:bg-neutral-500 dark:text-white dark:placeholder-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
                 :class="v$.username.$errors.length ? ' border-red-500' : ''" placeholder="username" />
             </div>
           </div>
@@ -46,7 +46,7 @@
             <div>
               <label for="email-address" class="sr-only">Email address</label>
               <input v-model="registrationForm.email" id="email-address" name="email" type="email" autocomplete="email" required
-                class="dark:bg-slate-500 dark:text-white dark:placeholder-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                class="dark:bg-neutral-500 dark:text-white dark:placeholder-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
                 :class="v$.email.$errors.length ? ' border-red-500' : ''" placeholder="Email address" />
             </div>
           </div>
@@ -54,7 +54,7 @@
             <label for="password" class="sr-only">Password</label>
             <input v-model="registrationForm.password" id="password" name="password" type="password" autocomplete="current-password"
               required
-              class="dark:bg-slate-500 dark:text-white dark:placeholder-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+              class="dark:bg-neutral-500 dark:text-white dark:placeholder-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
               :class="v$.password.$errors.length ? ' border-red-500' : ''" placeholder="Password" />
           </div>
 

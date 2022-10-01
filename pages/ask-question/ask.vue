@@ -1,6 +1,6 @@
 <template>
     <div
-     class="min-h-full theme-mode from-white to-teal-200 dark:bg-black/95">
+     class="min-h-full theme-mode from-white to-green-200 dark:bg-black/95">
    
      <div class="h-32 flex justify-center">
       <div class="flex m-5">

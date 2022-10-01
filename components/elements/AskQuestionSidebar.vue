@@ -1,7 +1,7 @@
 <template>
     <div class="md:w-1/3 pt-5 z-10 boarder flex justify-right fixed">
         <aside class="w-100 hidden sm:block" aria-label="Sidebar">
-            <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+            <div class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-neutral-800">
                 <nuxt-link to="/ask-question/ask" type="button"
                     class="w-full px-6 py-3.5 text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
                     Ask Question

@@ -7,7 +7,7 @@
         <form action="/api/stripe/createPortalSession" method="POST">
           <input type="hidden" id="session-id" name="session_id" :value="sessionId" />
           <button
-            class="w-full px-6 py-3.5 text-white bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+            class="w-full px-6 py-3.5 text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
             id="checkout-and-portal-button" type="submit">
             Manage your subscription
           </button>

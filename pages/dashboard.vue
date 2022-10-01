@@ -1,9 +1,17 @@
 <template>
-    <div class="flex py-60 flex-col h-screen my-auto items-center bgimg bg-cover from-white to-blue-200 dark:bg-black/95">
-      <div class="mt-2 bg-white font-bold text-7xl py-1 px-8 rounded m-2 dark:bg-slate-800 dark:text-white">
-        welcome to the dashboard <span v-if="user.name"> {{user.name}}</span>
+    <div class="h-screen bg-white dark:bg-black/95">
+  <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
+    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <span class="block dark:text-white">Welcome to the dasboard!</span>
+      <span class="block text-green-600">Ask your question <span class="text-black dark:text-white" v-if="user"> {{ user.username }}</span>.</span>
+    </h2>
+    <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+      <div class="inline-flex rounded-md shadow">
+        <nuxt-link to="/ask-question/search" class="inline-flex items-center justify-center rounded-md border border-transparent bg-green-600 px-5 py-3 text-base dark:text-white font-medium text-white hover:bg-green-700">Ask question</nuxt-link>
       </div>
     </div>
+  </div>
+</div>
   </template>
 
 <script setup lang="ts">

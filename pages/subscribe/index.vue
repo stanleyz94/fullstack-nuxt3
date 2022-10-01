@@ -9,7 +9,7 @@
     <div class="mt-12 m-auto -space-y-4 items-center justify-center md:flex md:space-y-0 md:-space-x-4 xl:w-10/12">
         <div class="relative z-10 -mx-4 group md:w-6/12 md:mx-0 lg:w-5/12">
         <div aria-hidden="true"
-            class="absolute top-0 w-full h-full dark:bg-grey-900 border-2  border-green-500/50 rounded-2xl bg-white shadow-xl ">
+            class="absolute top-0 w-full h-full dark:bg-neutral-900 border-2  border-green-500/50 rounded-2xl bg-white shadow-xl ">
         </div>
         <div class="relative p-6 space-y-6 lg:p-8">
             <h3 class="text-3xl text-gray-700 dark:text-white font-semibold text-center">Premium Membership</h3>
