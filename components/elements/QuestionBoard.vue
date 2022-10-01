@@ -8,7 +8,7 @@
                     Questions</label>
                 <div class="relative w-full">
                     <input v-model="searchInput" type="search" id="search-dropdown"
-                        class="block p-2.5 w-full z-20 text-sm text-slate-900 border-solid  bg-slate-50 rounded-lg border-solid border-2 border-indigo-600 dark:bg-slate-900 dark:text-gray-300"
+                        class="block p-2.5 w-full z-20 text-sm text-slate-900 border-solid  bg-slate-50 rounded-lg border-solid border-2 border-teal-600 dark:bg-slate-900 dark:text-gray-300"
                         placeholder="Search Questions...">
                     <button type="submit" class="absolute top-0 right-0 p-2.5 text-sm font-medium dark:text-white"><svg
                             class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -24,7 +24,7 @@
 
         <Transition name="fade" v-if="!pending" v-for="question in questions">
             <NuxtLink v-if="question"
-                class="flex flex-column justify-center hover:scale-110 transition duration-500"
+                class="flex flex-column justify-center"
                 :to="`/ask-question/question/${question.id}`">
                 <div class="max-w-xxl w-full p-4">
                     <div class="p-8 bg-white dark:bg-slate-800 rounded shadow-md">

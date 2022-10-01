@@ -10,11 +10,10 @@ const stripe = new Stripe(config.private.stripeSecretKey, null)
 
 
 export async function getSubscribeUrl(lookupKey: string, user: IUser): Promise<SubPostRes> {
-    console.log('config.private.stripeSecretKey', config.private.stripeSecretKey)
     const customerEmail = user.email
     const price = await stripe.prices.retrieve(lookupKey)
     let shouldUpdateUser = false
-    if(!user.stripeCustomerId) {
+    if (!user.stripeCustomerId) {
         shouldUpdateUser = true
         const customer = await stripe.customers.create({ email: customerEmail })   
         user.stripeCustomerId = customer.id

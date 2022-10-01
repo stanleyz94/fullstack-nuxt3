@@ -1,30 +1,6 @@
 import { IUser } from "@/types/IUser"
-import { FormValidation } from "@/types/FormValidation"
-import { RegistrationRequest } from "@/types/IRegistration"
 import { getUserByEmail, getUserByUserName } from "../db/repositories/userRepository"
-// import { validate } from "./validator"
 import { CreateUserInput } from "../schema/userSchema"
-
-type ExistsCheck = {
-    value: boolean
-    message?: string
-}
-
-type RegistrationErrors = {
-    emailError?: string
-    usernameError?: string
-}
-
-
-// export async function validateUser(data: RegistrationRequest): Promise<FormValidation> {
-//     const errors = await validate(data)
-
-//     if (errors.size > 0) {
-//         return { hasErrors: true, errors }
-//     }
-
-//     return { hasErrors: false }
-// }
 
 
 export async function doesUserExists({ username, email }: CreateUserInput['data']) {
@@ -56,9 +32,9 @@ export async function doesUserExists({ username, email }: CreateUserInput['data'
 }
 
 
-export function sanitizeUserForFrontend(user: IUser | undefined): IUser {
+export function extractUserInfoForClient(user: IUser | undefined): IUser {
     if (!user) {
-        return user
+        throw createError({ statusCode: 401, statusMessage: `Unauthorized` })
     }
 
     delete user.password

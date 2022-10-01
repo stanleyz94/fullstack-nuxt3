@@ -27,8 +27,23 @@
             bg-clip-padding
             border-none
           " aria-labelledby="dropdownMenuButton1">
-        <li @click="logout">
-  
+        
+          <li>
+            <a class="
+                  dropdown-item
+                  text-sm
+                  py-2
+                  px-4
+                  font-normal
+                  block
+                  w-full
+                  whitespace-nowrap
+                  bg-transparent
+                  text-gray-700
+                  hover:bg-gray-100
+                " href="#">Settings</a>
+          </li>
+          <li @click="logout">
           <a class="
                 dropdown-item
                 text-sm
@@ -41,37 +56,7 @@
                 bg-transparent
                 text-gray-700
                 hover:bg-gray-100
-              " href="#">logout</a>
-        </li>
-        <li>
-          <a class="
-                dropdown-item
-                text-sm
-                py-2
-                px-4
-                font-normal
-                block
-                w-full
-                whitespace-nowrap
-                bg-transparent
-                text-gray-700
-                hover:bg-gray-100
-              " href="#">Another action</a>
-        </li>
-        <li>
-          <a class="
-                dropdown-item
-                text-sm
-                py-2
-                px-4
-                font-normal
-                block
-                w-full
-                whitespace-nowrap
-                bg-transparent
-                text-gray-700
-                hover:bg-gray-100
-              " href="#">Something else here</a>
+              " href="#">Logout</a>
         </li>
       </ul>
     </div>

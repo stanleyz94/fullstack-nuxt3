@@ -10,7 +10,6 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
     
     const authToken = getCookie(event, 'auth_token')
     const user = await getUserBySessionToken(authToken)
-    console.log( { userId: user.id, authorId: question.authorId } )
     const isMe = user.id === question.authorId
 
     if (!isMe) {
