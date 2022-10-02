@@ -9,7 +9,9 @@ export default defineNuxtConfig({
         viewer: true,  
     },
     colorMode: {
-        classSuffix: ''
+        classSuffix: '',
+        preference: 'dark',
+        fallback: 'dark',
     },
     runtimeConfig: {
         private: {

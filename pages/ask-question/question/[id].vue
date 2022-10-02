@@ -1,10 +1,8 @@
 <template>
-
     <div
      class=" min-h-full theme-mode from-white to-green-200 dark:bg-black/95">
      <div class="h-32 flex justify-center">
       <div class="flex m-5">
-       <img class="mx-auto h-24 w-auto" src="/img/logo_clear_fsj.png" alt="Question Board logo" />
        <h1 class="py-9 text-center text-5xl font-extrabold text-gray-900 dark:text-gray-400 ml-4">
         Ask Question
        </h1>
@@ -15,13 +13,13 @@
       <div class="md:w-1/3 z-1 flex justify-right relative"></div>
       <div class="w-full md:w-1/3">
        <div class="p-8 text-white bg-lime-600 dark:bg-black/95 rounded shadow-md" v-if="showDeleted">
-        question deleted
+        Question deleted
        </div>
-       <div v-if="question" class="flex flex-column justify-center">
+       <!-- <div v-if="question" class="flex flex-column justify-center">
         <div class="max-w-xxl w-full p-4">
          <div class="p-8 bg-white dark:bg-neutral-800 rounded shadow-md">
           <div class="flex justify-end dark:text-gray-300">
-           {{ question.authName }}
+           @{{ question.author.username }}
           </div>
    
           <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-300">{{ question.title }}</h2>
@@ -32,7 +30,7 @@
             Edit
            </button>
             <button @click="deleteQuestion" class="bg-red-500 ml-3 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-            delete
+            Delete
            </button>
           </div>
           
@@ -44,16 +42,14 @@
        <div v-for="answer in question.answers"
         class="flex flex-column justify-center">
         <div class="max-w-xxl w-full p-4">
-   
          <div class="p-8 bg-white dark:bg-neutral-900 rounded shadow-md">
           <div class="flex justify-end dark:text-gray-300">
-           {{ answer.authorName }}
+           @{{ answer.author.username }}
           </div>
           <p class="dark:text-gray-300">{{ answer.text }}</p>
          </div>
         </div>
-       </div>
-   
+       </div> -->
        <div class="flex justify-end">
         <button v-if="!showAnswerForm" @click="showAnswerForm = !showAnswerForm" type="button"
          class="text-white bg-gradient-to-r from-green-500 to-green-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
@@ -64,11 +60,64 @@
         <AnswerForm :questionId="questionId" @addAnswer="addAnswer" />
        </div>
       </div>
+      <!-- post card -->
+      <!-- TODO Questions -->
+        <div v-if="question" class="flex dark:bg-neutral-800 bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-10 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
+        <div class="flex items-start px-4 py-6">
+            <svg class="w-12 h-12 rounded-full mr-4 " xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#4ade80"><g><rect fill="none" height="24" width="24"/></g><g><path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,6c1.93,0,3.5,1.57,3.5,3.5S13.93,13,12,13 s-3.5-1.57-3.5-3.5S10.07,6,12,6z M12,20c-2.03,0-4.43-0.82-6.14-2.88C7.55,15.8,9.68,15,12,15s4.45,0.8,6.14,2.12 C16.43,19.18,14.03,20,12,20z"/></g></svg>
+            <!-- <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar"> -->
+            <div>
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900 -mt-1 dark:text-white "> @{{ question.author.username }} </h2>
+                    <small class="text-sm text-gray-700 dark:text-white ">22h ago</small>
+                </div>
+                <p class="text-gray-700 dark:text-white ">Joined 12 SEP 2012. </p>
+                <p class="mt-3 text-gray-700 dark:text-white text-sm">
+                    {{ question.description }}
+                </p>
+                <div class="mt-4 flex items-center">
+                    <div class="flex mr-2 text-gray-700 dark:text-white  text-sm mr-8">
+                    <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                    </svg>
+                    <span>{{ question.answers.length }}</span>
+                    </div>
+                </div>
+                <div class="mt-5" v-if="isMine && showEditForm === false">
+                    <button @click="showEditForm = true" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        Edit
+                    </button>
+                        <button @click="deleteQuestion" class="bg-red-500 ml-3 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        Delete
+                    </button>
+                </div>
+                <QuestionForm @closeEditForm="closeEditForm" :endpoint="editEndpoint" :data="question" v-if="showEditForm"/>
+            </div>
+        </div>
+        </div>
+        <div v-for="answer in question.answers" class="flex dark:bg-neutral-900 bg-white shadow-lg rounded-lg mx-4 md:mx-auto my-10 max-w-md md:max-w-2xl "><!--horizantil margin is just for display-->
+        <div class="flex items-start px-4 py-6">
+            <svg class="w-12 h-12 rounded-full mr-4 " xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#4ade80"><g><rect fill="none" height="24" width="24"/></g><g><path d="M12,2C6.48,2,2,6.48,2,12s4.48,10,10,10s10-4.48,10-10S17.52,2,12,2z M12,6c1.93,0,3.5,1.57,3.5,3.5S13.93,13,12,13 s-3.5-1.57-3.5-3.5S10.07,6,12,6z M12,20c-2.03,0-4.43-0.82-6.14-2.88C7.55,15.8,9.68,15,12,15s4.45,0.8,6.14,2.12 C16.43,19.18,14.03,20,12,20z"/></g></svg>
+            <!-- <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" alt="avatar"> -->
+            <div>
+                <div class="flex items-center justify-between">
+                    <h2 class="text-lg font-semibold text-gray-900 -mt-1 dark:text-white "> @{{ answer.author.username }} </h2>
+                    <small class="text-sm text-gray-700 dark:text-white ">22h ago</small>
+                </div>
+                <p class="text-gray-700 dark:text-white ">Joined 12 SEP 2012. </p>
+                <p class="mt-3 text-gray-700 dark:text-white text-sm">
+                    {{ answer.text }}
+                </p>
+            </div>
+        </div>
+        </div>
+
+
+        
      </div>
-   
     </div>
-   
-   </template>
+</template>
+
 <script setup lang="ts">
 import { IAnswer } from '@/types/IAnswer';
 import { IQuestion } from '@/types/IQuestion';
@@ -106,9 +155,7 @@ const deleteQuestion = async () => {
    body: { questionId }
   }) 
   showDeleted.value = true
-  setTimeout(() => {
-   router.push('/ask-question/search')
-  })
+  router.push('/ask-question/search')
 }
 
 const addAnswer = (answer: IAnswer) => {
@@ -121,7 +168,7 @@ const question = await getQuestion()
 const me = await useUser()
 const isMine = question.authorId === me.id    
 const editEndpoint = '/api/ask-question/edit-question' 
-
+console.log({ question })
 
 
 </script>

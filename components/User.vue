@@ -4,9 +4,7 @@
         Welcome <strong>{{ user.username }}</strong>
   
       </span>
-      <img  @click="hideActions = !hideActions" :src="avatar(user.avatarUrl)" class="rounded-full w-10 h-10 mr-2"
-        alt="avatar" />
-  
+      <svg @click="hideActions = !hideActions" class="rounded-full w-8 h-8" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#4ade80"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
       <ul :class="[{ 'hidden': hideActions }]" class="
             dropdown-menu
             min-w-max
@@ -67,8 +65,6 @@
 import { IUser} from '@/types/IUser'
 import { userLogout } from '@/composables/useAuth'
 import { onClickOutside } from '@vueuse/core'
-
-const avatar = (given: string | undefined) => given ?? '/img/logo_short.png'
 
 const user = useState<IUser>('user')
 const logout = userLogout

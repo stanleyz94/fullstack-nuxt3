@@ -37,7 +37,7 @@
                 <span>Support Question Board</span>
             </li>
             </ul>
-            <button v-if="user === null" @click="goToRegister"
+            <button v-if="!user" @click="goToRegister"
             class="block w-full py-3 px-6 text-center rounded-xl transition duration-500 bg-green-600 hover:bg-green-700 active:bg-green-800 focus:bg-green-600">
             <span class="text-white font-semibold">
                 Sign Up and Subscribe
@@ -50,7 +50,7 @@
                 class="block w-full py-3 px-6 text-center rounded-xl transition duration-500 bg-green-600 hover:bg-green-700 active:bg-green-800 focus:bg-green-600">
                 <span class="text-white font-semibold">
                 Subscribe Now
-                </span>
+                </span> 
             </button>
             </form>
         </div>

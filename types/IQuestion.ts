@@ -7,4 +7,7 @@ export interface IQuestion {
     title: string
     description: string
     answers: IAnswer[]
+    author: {
+        username: string
+    }
 }

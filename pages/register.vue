@@ -3,14 +3,8 @@
   <div class="dark:bg-black/95 h-screen">
     <div class="flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div class="max-w-md w-full">
-        <div class="flex">
-          <img class="mx-auto h-24 w-auto" src="/img/logo_clear_fsj.png" alt="Question Board logo" />
-          <h1 class="py-9 text-center text-5xl font-extrabold text-gray-900 dark:text-gray-400">
-            Question Board
-          </h1>
-        </div>
         <div>
-          <h2 class="text-center text-3xl font-extrabold mt-5 text-gray-900 dark:text-white">
+          <h2 class="mt-6 py-9 text-center text-3xl font-extrabold text-gray-900 dark:text-gray-400">
             Sign Up
           </h2>
         </div>
@@ -38,7 +32,7 @@
               <label for="username" class="sr-only">Username</label>
               <input v-model="registrationForm.username" id="username" name="username" required
                 class="dark:bg-neutral-500 dark:text-white dark:placeholder-white appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
-                :class="v$.username.$errors.length ? ' border-red-500' : ''" placeholder="username" />
+                :class="v$.username.$errors.length ? ' border-red-500' : ''" placeholder="Username" />
             </div>
           </div>
 
