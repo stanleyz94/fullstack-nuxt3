@@ -6,4 +6,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  safelist: [
+    'bg-red-600',
+    'bg-green-600'
+  ]
 }

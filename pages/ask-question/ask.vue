@@ -20,8 +20,8 @@
 </template>
 
 <script setup lang="ts">
-import QuestionForm from '@/components/elements/QuestionForm.vue'
-import AskQuestionSidebar from '@/components/elements/AskQuestionSidebar.vue'
+import QuestionForm from '@/components/question/QuestionForm.vue'
+import AskQuestionSidebar from '@/components/question/AskQuestionSidebar.vue'
 import { IQuestionPost } from '@/types/IQuestionPost';
 
 definePageMeta({

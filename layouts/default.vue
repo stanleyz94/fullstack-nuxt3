@@ -7,5 +7,5 @@
 
 
 <script setup lang="ts">
-    import Navbar from '~/components/layout/navbar.vue'
+    import Navbar from '~/components/layout/base/navbar.vue'
 </script>

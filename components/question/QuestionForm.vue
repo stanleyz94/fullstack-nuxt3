@@ -1,6 +1,6 @@
 <template>
     <form>
-      <div class="mb-6">
+      <div class="my-6">
         <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Short
           Description</label>
         <input v-model="data.title" type="title" id="title"
