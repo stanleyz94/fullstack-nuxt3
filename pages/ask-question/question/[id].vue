@@ -92,7 +92,6 @@
         :key="index"
         class="flex dark:bg-neutral-900 bg-white shadow-lg rounded-lg mx-auto my-10 max-w-md md:max-w-2xl"
       >
-        <!--horizantil margin is just for display-->
         <div class="flex items-start px-4 py-6 w-full">
           <svg
             class="w-12 h-12 rounded-full mr-4"
@@ -124,7 +123,7 @@
           </div>
         </div>
       </div>
-      <div class="flex justify-end">
+      <div class="max-w-md md:max-w-2xl mx-auto flex flex-col">
         <button
           v-if="!showAnswerForm"
           type="button"
@@ -133,14 +132,12 @@
         >
           Answer
         </button>
-      </div>
-      <template v-if="showAnswerForm">
         <QuestionAnswerForm
-          class="max-w-md md:max-w-2xl mx-auto"
+          v-else
           :question-id="questionId"
           @addAnswer="addAnswer"
         />
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -194,5 +191,4 @@ const question = await getQuestion()
 const me = await useUser()
 const isMine = question.authorId === me.id
 const editEndpoint = '/api/ask-question/edit-question'
-console.log({ question })
 </script>

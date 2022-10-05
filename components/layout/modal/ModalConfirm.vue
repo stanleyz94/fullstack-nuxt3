@@ -70,7 +70,7 @@
 <script setup lang="ts">
 import { themeStyle } from '@/types/ThemeStyle'
 
-const confirmModalState = useState<boolean>('confirmModal', () => true)
+const confirmModalState = useState<boolean>('confirmModal', () => false)
 
 interface ConfirmModalProps {
   theme: themeStyle
