@@ -1,7 +1,7 @@
-import { IUser } from "./IUser";
+import { IUser } from './IUser'
 
 export interface ISession {
-    authToken?: string;
-    user?: IUser
-    userId?: number
+  authToken?: string
+  user?: IUser
+  userId?: number
 }

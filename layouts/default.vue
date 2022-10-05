@@ -1,11 +1,10 @@
 <template>
-    <div class="h-screen dark:bg-black">
-        <Navbar />
-        <slot />
-    </div>
+  <div class="h-screen dark:bg-black">
+    <BaseNavbar />
+    <slot />
+  </div>
 </template>
 
-
 <script setup lang="ts">
-    import Navbar from '~/components/layout/base/navbar.vue'
+import BaseNavbar from '~/components/layout/base/BaseNavbar.vue'
 </script>

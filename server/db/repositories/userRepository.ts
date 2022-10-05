@@ -1,11 +1,11 @@
-import prisma from "@/server/db/client";
-import { IUser}  from '@/types/IUser';
-import { ISubscription } from "@/types/ISubscription";
+import prisma from '@/server/db/client'
+import { IUser } from '@/types/IUser'
+import { ISubscription } from '@/types/ISubscription'
 
 export async function getUserByEmail(email: string): Promise<IUser> {
   return await prisma.user.findUnique({
     where: {
-      email: email,
+      email,
     },
     select: {
       id: true,
@@ -17,7 +17,7 @@ export async function getUserByEmail(email: string): Promise<IUser> {
 export async function getUserByUserName(username: string): Promise<IUser> {
   return await prisma.user.findUnique({
     where: {
-      username: username,
+      username,
     },
     select: {
       id: true,
@@ -43,14 +43,14 @@ export async function createUser(data: IUser) {
 export async function getUserById(id: number): Promise<IUser> {
   return await prisma.user.findUnique({
     where: {
-      id
+      id,
     },
     select: {
       id: true,
       username: true,
       email: true,
       stripeCustomerId: true,
-    }
+    },
   })
 }
 
@@ -58,12 +58,14 @@ export async function updateStripeCustomerId(data: IUser) {
   return await prisma.user.update({
     where: { email: data.email },
     data: {
-      stripeCustomerId: data.stripeCustomerId
-    }
+      stripeCustomerId: data.stripeCustomerId,
+    },
   })
 }
 
-export async function getUserByStripeCustomerId(stripeCustomerId: string): Promise<IUser> {
+export async function getUserByStripeCustomerId(
+  stripeCustomerId: string
+): Promise<IUser> {
   return await prisma.user.findFirst({
     where: {
       stripeCustomerId,
@@ -80,7 +82,7 @@ export async function getUserByStripeCustomerId(stripeCustomerId: string): Promi
 export async function createOrUpdateSubscription(data: ISubscription) {
   return await prisma.subscription.upsert({
     where: {
-      stripeId: data.stripeId
+      stripeId: data.stripeId,
     },
     create: {
       userId: data.userId,
@@ -91,7 +93,7 @@ export async function createOrUpdateSubscription(data: ISubscription) {
       trialEndsAt: data.trialEndsAt,
       endsAt: data.endsAt,
       lastEventDate: data.lastEventDate,
-      startDate: data.startDate
+      startDate: data.startDate,
     },
     update: {
       stripeStatus: data.stripeStatus,
@@ -100,15 +102,17 @@ export async function createOrUpdateSubscription(data: ISubscription) {
       trialEndsAt: data.trialEndsAt,
       endsAt: data.endsAt,
       lastEventDate: data.lastEventDate,
-      startDate: data.startDate
+      startDate: data.startDate,
     },
   })
 }
 
-export async function getSubsriptionById(stripeId: string): Promise<ISubscription> {
+export async function getSubsriptionById(
+  stripeId: string
+): Promise<ISubscription> {
   return await prisma.subscription.findFirst({
     where: {
-      stripeId
+      stripeId,
     },
   })
 }

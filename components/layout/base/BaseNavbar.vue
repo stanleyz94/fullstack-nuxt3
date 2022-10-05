@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar relative dark:bg-black/95">
+  <div class="navbar relative dark:bg-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div
         class="flex justify-between items-center py-6 md:justify-start md:space-x-10"
@@ -34,7 +34,23 @@
             class="h-7 w-auto"
             src="/img/logo-question-board.png"
           /> -->
-          <svg class="h-7 w-auto dark:text-white" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><circle cx="20" cy="12" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="20" r="2"/><path d="M10.05 8.59L6.03 4.55h-.01l-.31-.32-1.42 1.41 4.02 4.05.01-.01.31.32zm3.893.027l4.405-4.392L19.76 5.64l-4.405 4.393zM10.01 15.36l-1.42-1.41-4.03 4.01-.32.33 1.41 1.41 4.03-4.02zm9.75 2.94l-3.99-4.01-.36-.35L14 15.35l3.99 4.01.35.35z"/><circle cx="12" cy="4" r="2"/></svg>
+          <svg
+            class="h-7 w-auto dark:text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 0 24 24"
+            width="24px"
+            fill="currentColor"
+          >
+            <path d="M0 0h24v24H0z" fill="none" />
+            <circle cx="20" cy="12" r="2" />
+            <circle cx="4" cy="12" r="2" />
+            <circle cx="12" cy="20" r="2" />
+            <path
+              d="M10.05 8.59L6.03 4.55h-.01l-.31-.32-1.42 1.41 4.02 4.05.01-.01.31.32zm3.893.027l4.405-4.392L19.76 5.64l-4.405 4.393zM10.01 15.36l-1.42-1.41-4.03 4.01-.32.33 1.41 1.41 4.03-4.02zm9.75 2.94l-3.99-4.01-.36-.35L14 15.35l3.99 4.01.35.35z"
+            />
+            <circle cx="12" cy="4" r="2" />
+          </svg>
         </nuxt-link>
         <nav class="hidden md:flex space-x-10">
           <nuxt-link to="/subscribe">
@@ -68,7 +84,7 @@
             Sign in
           </nuxt-link>
 
-          <User v-if="user" :user="user" />
+          <UserProfile v-if="user" :user="user" />
 
           <nuxt-link
             v-if="!user"
@@ -81,7 +97,9 @@
         <ColorScheme placeholder="..." tag="span">
           <button
             class="hidden md:block"
-            @click="setColorTheme($colorMode.preference === 'dark' ? 'light' : 'dark')"
+            @click="
+              setColorTheme($colorMode.preference === 'dark' ? 'light' : 'dark')
+            "
           >
             <svg
               v-if="$colorMode.value === 'dark'"
@@ -115,10 +133,9 @@
 </template>
 
 <script setup lang="ts">
-    const user = useState('user')
-    const colorMode = useColorMode()
-    const setColorTheme = (newTheme: string) => {
-      colorMode.preference = newTheme
-    }
-
+const user = useState('user')
+const colorMode = useColorMode()
+const setColorTheme = (newTheme: string) => {
+  colorMode.preference = newTheme
+}
 </script>

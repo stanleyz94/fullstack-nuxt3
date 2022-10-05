@@ -1,28 +1,32 @@
-import { extractUserInfoForClient } from "@/server/services/userService";
-import bcrypt from 'bcrypt'
-import { getUserByEmail } from "@/server/db/repositories/userRepository";
+import * as bcrypt from 'bcrypt'
 import { CompatibilityEvent, sendError } from 'h3'
-import { makeSession } from "@/server/services/sessionService";
+import { extractUserInfoForClient } from '@/server/services/userService'
+import { getUserByEmail } from '@/server/db/repositories/userRepository'
+import { makeSession } from '@/server/services/sessionService'
 
 export default async (event: CompatibilityEvent) => {
-    const body = await useBody(event)
-    const email: string = body.email
-    const password: string = body.password
-    const user = await getUserByEmail(email)
-    console.log({ user, password, body })
-    
-    if (!user) {
-        sendError(event, createError({ statusCode: 401, statusMessage: 'Unauthorized'}))
-    }
-    
-    const isPasswordCorrect = bcrypt.compare(password, user.password)
+  const body = await useBody(event)
+  const email: string = body.email
+  const password: string = body.password
+  const user = await getUserByEmail(email)
 
-    if (!isPasswordCorrect) {
-        sendError(event, createError({ statusCode: 401, statusMessage: 'Unauthorized'}))
-    }
+  if (!user) {
+    sendError(
+      event,
+      createError({ statusCode: 401, statusMessage: 'Unauthorized' })
+    )
+  }
 
-    await makeSession(user, event)
+  const isPasswordCorrect = bcrypt.compare(password, user.password)
 
-    return extractUserInfoForClient(user)
+  if (!isPasswordCorrect) {
+    sendError(
+      event,
+      createError({ statusCode: 401, statusMessage: 'Unauthorized' })
+    )
+  }
+
+  await makeSession(user, event)
+
+  return extractUserInfoForClient(user)
 }
-

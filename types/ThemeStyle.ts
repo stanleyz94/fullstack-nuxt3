@@ -1,4 +1,4 @@
 export enum themeStyle {
-    error = 'error',
-    success = 'success'
+  error = 'error',
+  success = 'success',
 }

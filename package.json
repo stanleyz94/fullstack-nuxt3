@@ -5,16 +5,25 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --ext .ts,.vue",
+    "lint-test": "eslint test.vue --ext .ts,.vue",
+    "format-check": "npx prettier --check ./"
   },
   "devDependencies": {
     "@nuxtjs/color-mode": "^3.1.5",
+    "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@nuxtjs/tailwindcss": "^5.3.3",
     "@types/bcrypt": "^5.0.0",
     "@types/uuid": "^8.3.4",
-    "eslint": "^8.23.1",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "nuxt": "3.0.0-rc.10",
-    "prisma": "^4.3.1"
+    "prettier": "^2.7.1",
+    "prisma": "^4.3.1",
+    "typescript": "^4.8.4"
   },
   "dependencies": {
     "@prisma/client": "^4.3.1",
