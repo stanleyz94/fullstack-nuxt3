@@ -107,7 +107,6 @@ import { useDebounceOnRef } from '@/composables/useDebounce'
 
 const searchInput = useDebounceOnRef('', 1000)
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { data: questions, pending } = await useFetch<IQuestion[]>(
   () => `/api/ask-question/search?search=${searchInput.value}`
 )
