@@ -3,7 +3,7 @@
     <div class="h-32 flex justify-center">
       <div class="flex m-5">
         <h1
-          class="py-9 text-center text-5xl font-extrabold text-gray-900 dark:text-gray-400 ml-4"
+          class="py-9 text-center text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-gray-400 ml-4"
         >
           Ask Question
         </h1>

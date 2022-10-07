@@ -1,5 +1,5 @@
 <template>
-  <div class="md:w-1/3 pt-5 z-10 boarder flex justify-right fixed">
+  <div class="pt-5 z-10 boarder flex justify-right fixed left-0 top-1/4">
     <aside class="w-100 hidden sm:block" aria-label="Sidebar">
       <div
         class="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-neutral-800"
@@ -20,8 +20,8 @@
         </nuxt-link>
         <ul class="space-y-2">
           <li>
-            <a
-              href="#"
+            <nuxt-link
+              to="/dashboard"
               class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <svg
@@ -34,7 +34,7 @@
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
               <span class="ml-3">Dashboard</span>
-            </a>
+            </nuxt-link>
           </li>
           <li>
             <a
@@ -54,7 +54,7 @@
                   d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"
                 ></path>
               </svg>
-              <span class="flex-1 ml-3 whitespace-nowrap">Inbox</span>
+              <span class="flex-1 ml-3 whitespace-nowrap">Notifications</span>
               <span
                 class="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200"
                 >5</span

@@ -44,6 +44,13 @@ export async function createAnswer(data: IAnswerPost, authorId: number) {
       questionId: data.questionId,
       text: data.text,
     },
+    include: {
+      author: {
+        select: {
+          username: true,
+        },
+      },
+    },
   })
 }
 
@@ -73,6 +80,11 @@ export async function searchQuestions(query: string): Promise<IQuestion[]> {
         },
       },
     },
+    orderBy: [
+      {
+        id: 'desc',
+      },
+    ],
   })
 }
 
