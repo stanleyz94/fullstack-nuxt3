@@ -64,6 +64,6 @@ const postQuestion = async () => {
     { method: 'POST', body: { data }, pick: ['id'], key: data.title }
   )
   emit('closeEditForm')
-  router.push(`/ask-question/question/${question.value.id}`)
+  router.push(`/ask-question/question/${question.value?.id}`)
 }
 </script>

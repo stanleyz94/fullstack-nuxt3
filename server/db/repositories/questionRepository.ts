@@ -60,15 +60,26 @@ export async function createAnswer(data: IAnswerPost, authorId: number) {
 // }
 // type IQuestionWithAuthorUsername = (IQuestion & { author: { username: string }})[]
 
-export async function searchQuestions(query: string): Promise<IQuestion[]> {
+export async function searchQuestions({
+  search,
+  take,
+  cursor: lastId,
+}: {
+  search: string
+  take: number
+  cursor: number | null
+}): Promise<IQuestion[]> {
   return await prisma.question.findMany({
+    take,
+    skip: lastId ? 1 : 0,
+    ...(lastId && { cursor: { id: lastId } }),
     where: {
       OR: [
         {
-          title: { contains: query },
+          title: { contains: search },
         },
         {
-          description: { contains: query },
+          description: { contains: search },
         },
       ],
     },

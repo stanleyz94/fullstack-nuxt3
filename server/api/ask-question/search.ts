@@ -1,9 +1,14 @@
 import { CompatibilityEvent } from 'h3'
 import { searchQuestions } from '@/server/db/repositories/questionRepository'
+import { useCryptCursor } from '@/server/utils'
 
 export default defineEventHandler(async (event: CompatibilityEvent) => {
   const query = useQuery(event)
-
+  const { encryptCursor, decryptCursor } = useCryptCursor()
+  let decodedCursor = null
+  const search = query.search as string
+  const take = parseInt(query.take as string)
+  const cursor = '1OkKlR4K7yBw8xoYtz8h7w=='
   // let limit = parseInt(query.limit)
   // let cursor = query.cursor
 
@@ -16,7 +21,22 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
   // }
 
   // sort
-  const result = await searchQuestions(query.search as string)
+
+  // query.search as string
+  if (cursor) {
+    decodedCursor = decryptCursor(cursor as string)
+    console.log({ decodedCursor })
+  }
+  const result = await searchQuestions({
+    search,
+    take: 4,
+    cursor: decodedCursor,
+  })
+
+  let nextCursor = null
+
+  nextCursor = result[4 - 1].id
+  nextCursor = encryptCursor(nextCursor)
   // const hasMoreResults = result.length === limit + 1
   // let nextCursor = null
 
@@ -35,6 +55,12 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
   //   result
 
   // }
-  console.log({ result })
+
+  // const test = {
+  //   take: 4,
+  //   skip: lastId ? 1 : 0,
+  //   ...(lastId && { cursor: lastId }),
+  // }
+  console.log({ data: result, meta: { nextCursor } })
   return result
 })

@@ -56,6 +56,8 @@ import { useDebounceOnRef } from '@/composables/useDebounce'
 const searchInput = useDebounceOnRef('', 1000)
 
 const { data: questions, pending } = await useFetch<IQuestion[]>(
-  () => `/api/ask-question/search?search=${searchInput.value}`
+  () => `/api/ask-question/search?search=${searchInput.value}`,
+  { server: false }
 )
+console.log('frontend', { questions })
 </script>
