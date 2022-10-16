@@ -2,7 +2,10 @@ import prisma from '@/server/db/client'
 import { IUser } from '@/types/IUser'
 import { ISubscription } from '@/types/ISubscription'
 
-export async function getUserByEmail(email: string): Promise<IUser> {
+export async function getUserByEmail(
+  email: string,
+  withPassword: boolean = false
+): Promise<IUser> {
   return await prisma.user.findUnique({
     where: {
       email,
@@ -10,6 +13,7 @@ export async function getUserByEmail(email: string): Promise<IUser> {
     select: {
       id: true,
       username: true,
+      password: withPassword,
     },
   })
 }
