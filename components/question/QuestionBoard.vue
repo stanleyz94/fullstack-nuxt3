@@ -39,7 +39,7 @@
       enter-active-class="transition duration-300"
       leave-active-class="transition duration-300"
     >
-      <li v-for="(question, index) in questions" :key="index">
+      <li v-for="(question, index) in questions?.result" :key="index">
         <NuxtLink v-if="question" :to="`/ask-question/question/${question.id}`">
           <QuestionBox :post="question" type="question" />
         </NuxtLink>
@@ -50,14 +50,27 @@
 
 <script setup lang="ts">
 import QuestionBox from './QuestionBox.vue'
-import { IQuestion } from '@/types/IQuestion'
+import { ISearch } from '@/types/ISearch'
 import { useDebounceOnRef } from '@/composables/useDebounce'
 
 const searchInput = useDebounceOnRef('', 1000)
 
-const { data: questions, pending } = await useFetch<IQuestion[]>(
-  () => `/api/ask-question/search?search=${searchInput.value}`,
+const {
+  data: questions,
+  pending,
+  error,
+} = await useFetch<ISearch>(
+  () => `/api/ask-question/searchc?search=${searchInput.value}`,
   { server: false }
 )
+
+console.log('frontend error', { error })
 console.log('frontend', { questions })
+// if (error.value) {
+//   throw createError({
+//     statusCode: 500,
+//     message: 'Something went wrong',
+//     fatal: true,
+//   })
+// }
 </script>

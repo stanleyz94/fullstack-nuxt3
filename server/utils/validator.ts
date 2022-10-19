@@ -28,7 +28,7 @@ export async function validateBody<T>(
   }
 }
 
-export const useCryptCursor = () => {
+export function useCryptCursor() {
   const generateIv = () => randomBytes(32)
 
   const encryptCursor = (data: string) => {

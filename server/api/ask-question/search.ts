@@ -8,7 +8,8 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
   let decodedCursor = null
   const search = query.search as string
   const take = parseInt(query.take as string)
-  const cursor = '1OkKlR4K7yBw8xoYtz8h7w=='
+  const cursor =
+    '5f30bea2608190467f265c7612eb4c1a5a4074b9b6e4e18e85966a53e270f13b:26e2cb37cff921021a407d5699bb9597:16'
   // let limit = parseInt(query.limit)
   // let cursor = query.cursor
 
@@ -24,8 +25,7 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
 
   // query.search as string
   if (cursor) {
-    decodedCursor = decryptCursor(cursor as string)
-    console.log({ decodedCursor })
+    decodedCursor = parseInt(decryptCursor(cursor as string))
   }
   const result = await searchQuestions({
     search,
@@ -33,10 +33,14 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
     cursor: decodedCursor,
   })
 
+  const hasMoreResults = result.length === take + 1
+
   let nextCursor = null
 
-  nextCursor = result[4 - 1].id
-  nextCursor = encryptCursor(nextCursor)
+  if (hasMoreResults) {
+    nextCursor = result[4 - 1].id
+    nextCursor = encryptCursor(nextCursor.toString())
+  }
   // const hasMoreResults = result.length === limit + 1
   // let nextCursor = null
 
@@ -62,5 +66,10 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
   //   ...(lastId && { cursor: lastId }),
   // }
   console.log({ data: result, meta: { nextCursor } })
-  return result
+  return {
+    result,
+    meta: {
+      nextCursor,
+    },
+  }
 })
