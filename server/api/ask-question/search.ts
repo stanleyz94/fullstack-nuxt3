@@ -8,8 +8,7 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
   let decodedCursor = null
   const search = query.search as string
   const take = parseInt(query.take as string)
-  const cursor =
-    '5f30bea2608190467f265c7612eb4c1a5a4074b9b6e4e18e85966a53e270f13b:26e2cb37cff921021a407d5699bb9597:16'
+  const cursor = query.cursor
   // let limit = parseInt(query.limit)
   // let cursor = query.cursor
 

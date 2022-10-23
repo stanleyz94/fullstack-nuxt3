@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="test">
     <div class="flex m-5 justify-center">
       <label
         for="search-dropdown"
@@ -45,32 +45,53 @@
         </NuxtLink>
       </li>
     </TransitionGroup>
+    <div
+      class="flex flex-col gap-2 p-4 w-300px h-48 m-auto overflow-y-scroll bg-gray-500/5 rounded"
+    >
+      <div
+        v-for="item in data"
+        :key="item"
+        class="h-30 bg-gray-500/5 rounded p-3 text-white"
+      >
+        {{ item }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useInfiniteScroll } from '@vueuse/core'
 import QuestionBox from './QuestionBox.vue'
 import { ISearch } from '@/types/ISearch'
 import { useDebounceOnRef } from '@/composables/useDebounce'
 
+const data = ref(Array.from(Array(100).keys()))
+
 const searchInput = useDebounceOnRef('', 1000)
 
-const {
-  data: questions,
-  pending,
-  error,
-} = await useFetch<ISearch>(
-  () => `/api/ask-question/searchc?search=${searchInput.value}`,
-  { server: false }
+const { data: questions, pending } = await useFetch<ISearch>(
+  () => `/api/ask-question/search?search=${searchInput.value}`,
+  {
+    server: false,
+    params: {
+      take: 4,
+    },
+  }
 )
 
-console.log('frontend error', { error })
-console.log('frontend', { questions })
-// if (error.value) {
-//   throw createError({
-//     statusCode: 500,
-//     message: 'Something went wrong',
-//     fatal: true,
-//   })
-// }
+const infiniteScrollContainer = ref<Document>(null)
+
+useInfiniteScroll(
+  infiniteScrollContainer,
+  () => {
+    // load more
+    console.log('fetch another data')
+    data.value.push(...Array.from({ length: 5 }, (_, i) => length + i))
+  },
+  { distance: 10 }
+)
+
+onMounted(() => {
+  infiniteScrollContainer.value = window.document
+})
 </script>
