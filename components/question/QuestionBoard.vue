@@ -69,8 +69,15 @@ const data = ref(Array.from(Array(100).keys()))
 
 const searchInput = useDebounceOnRef('', 1000)
 
-const { data: questions, pending } = await useFetch<ISearch>(
-  () => `/api/ask-question/search?search=${searchInput.value}`,
+const cursor = ref<string>('')
+
+const {
+  data: questions,
+  pending,
+  refresh,
+} = await useFetch<ISearch>(
+  () =>
+    `/api/ask-question/search?search=${searchInput.value}&cursor=${cursor.value}`,
   {
     server: false,
     params: {
@@ -81,11 +88,21 @@ const { data: questions, pending } = await useFetch<ISearch>(
 
 const infiniteScrollContainer = ref<Document>(null)
 
+// fix this shit
 useInfiniteScroll(
   infiniteScrollContainer,
   () => {
     // load more
     console.log('fetch another data')
+    console.log(cursor.value || null)
+    console.log({ nextCursor: questions?.value?.meta?.nextCursor })
+    cursor.value = questions.value?.meta?.nextCursor || ''
+    console.log({ cursorValue: cursor.value })
+    if (cursor.value) {
+      refresh({
+        _initial: false,
+      })
+    }
     data.value.push(...Array.from({ length: 5 }, (_, i) => length + i))
   },
   { distance: 10 }

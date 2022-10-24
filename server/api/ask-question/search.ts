@@ -9,6 +9,7 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
   const search = query.search as string
   const take = parseInt(query.take as string)
   const cursor = query.cursor
+  console.log({ cursor })
   // let limit = parseInt(query.limit)
   // let cursor = query.cursor
 
@@ -31,15 +32,20 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
     take: 4,
     cursor: decodedCursor,
   })
-
+  const isFirstSearch = !decodedCursor && result.length
   const hasMoreResults = result.length === take + 1
 
   let nextCursor = null
-
-  if (hasMoreResults) {
+  if (isFirstSearch || hasMoreResults) {
     nextCursor = result[4 - 1].id
     nextCursor = encryptCursor(nextCursor.toString())
   }
+  console.log({
+    isFirstSearch,
+    hasMoreResults,
+    nextCursor,
+    resultLength: result.length,
+  })
   // const hasMoreResults = result.length === limit + 1
   // let nextCursor = null
 
