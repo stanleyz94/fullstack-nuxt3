@@ -9,72 +9,30 @@ export default defineEventHandler(async (event: CompatibilityEvent) => {
   const search = query.search as string
   const take = parseInt(query.take as string)
   const cursor = query.cursor
-  console.log({ cursor })
-  // let limit = parseInt(query.limit)
-  // let cursor = query.cursor
 
-  // if (!limit) limit = 6
-
-  // if(!cursor) {
-  //   cursor = new Date().toISOString()
-  // } else {
-  //   cursor = new Date(cursor).toISOString()
-  // }
-
-  // sort
-
-  // query.search as string
   if (cursor) {
     decodedCursor = parseInt(decryptCursor(cursor as string))
   }
+
   const result = await searchQuestions({
     search,
     take: 4,
     cursor: decodedCursor,
   })
-  const isFirstSearch = !decodedCursor && result.length
-  const hasMoreResults = result.length === take + 1
+  const hasMoreResults = result.length === take
 
   let nextCursor = null
-  if (isFirstSearch || hasMoreResults) {
+
+  if (hasMoreResults) {
     nextCursor = result[4 - 1].id
     nextCursor = encryptCursor(nextCursor.toString())
   }
-  console.log({
-    isFirstSearch,
-    hasMoreResults,
-    nextCursor,
-    resultLength: result.length,
-  })
-  // const hasMoreResults = result.length === limit + 1
-  // let nextCursor = null
 
-  // if (hasMoreResults) {
-  //   //remembering next cursor value
-  //   const nextCursorResult = result[limit - 1]
-  //   nextCursor = new Date(nextCursorResult.createdAt).getTime()
-  //   result.pop()
-  // }
-
-  // const response = {
-  //   limit,
-  //   hasMoreResults,
-  //   cursor: nextCursor,
-  //   resultCount: result.length,
-  //   result
-
-  // }
-
-  // const test = {
-  //   take: 4,
-  //   skip: lastId ? 1 : 0,
-  //   ...(lastId && { cursor: lastId }),
-  // }
-  console.log({ data: result, meta: { nextCursor } })
   return {
     result,
     meta: {
       nextCursor,
+      searchedWord: search,
     },
   }
 })

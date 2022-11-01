@@ -28,22 +28,9 @@
   </div>
 </template>
 <script setup lang="ts">
-// import { useInfiniteScroll } from '@vueuse/core'
 import QuestionBoard from '@/components/question/QuestionBoard.vue'
 import QuestionSidebar from '@/components/question/QuestionSidebar.vue'
 definePageMeta({
   middleware: 'auth',
 })
-
-// const el = ref<HTMLElement>(null)
-// const data = ref(Array.from(Array(100).keys()))
-// useInfiniteScroll(
-//   el,
-//   () => {
-//     // load more
-//     console.log('fetch another data')
-//     data.value.push(...Array.from({ length: 5 }, (_, i) => length + i))
-//   },
-//   { distance: 10 }
-// )
 </script>
