@@ -81,7 +81,7 @@ const isQuestion = (
   return typeof (post as IQuestion)[key] !== 'undefined'
 }
 
-const post = reactive({
+const post = computed(() => ({
   ...props.post,
   title: isQuestion(props.post, 'title') ? props.post.title : '',
   description: isQuestion(props.post, 'description')
@@ -90,5 +90,5 @@ const post = reactive({
   numberOfAnswers: isQuestion(props.post, 'answers')
     ? props.post.answers.length
     : 0,
-})
+}))
 </script>

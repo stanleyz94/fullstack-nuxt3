@@ -68,19 +68,34 @@ const route = useRoute()
 const router = useRouter()
 const questionId = route.params?.id as string
 
+const question = reactive({
+  id: 0,
+  authorId: 0,
+  title: '',
+  description: '',
+  answers: [],
+  author: {
+    username: '',
+  },
+})
+
 if (!questionId) {
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
 }
 
 const showEditForm = ref(false)
 const showAnswerForm = useState('showAnswerForm' + questionId, () => false)
-const closeEditForm = () => (showEditForm.value = false)
+const closeEditForm = async () => {
+  await getQuestion()
+  showEditForm.value = false
+}
 
 const getQuestion = async () => {
   try {
-    return await $fetch<IQuestion>(
+    const res = await $fetch<IQuestion>(
       `/api/ask-question/question?id=${questionId}`
     )
+    Object.assign(question, res)
   } catch (e) {
     const statusCode = e.response?.status
     const statusMessage =
@@ -102,7 +117,7 @@ const addAnswer = (answer: IAnswer) => {
   showAnswerForm.value = false
 }
 
-const question = await getQuestion()
+await getQuestion()
 const me = await useUser()
 const isMine = question.authorId === me.id
 const editEndpoint = '/api/ask-question/edit-question'
