@@ -4,12 +4,16 @@ import { IUser } from '@/types/IUser'
 import { doesUserExists } from '@/server/services/userService'
 import { createUser } from '@/server/db/repositories/userRepository'
 import { makeSession } from '@/server/services/sessionService'
-import { validateBody } from '@/server/utils'
+import { validateClientData } from '@/server/utils'
 import { CreateUserInput, createUserSchema } from '@/server/schema/userSchema'
 
 export default async (event: CompatibilityEvent) => {
-  const body = await validateBody<CreateUserInput>(event, createUserSchema)
-  const data = body.data
+  const body = await validateClientData<CreateUserInput, typeof useBody>(
+    event,
+    createUserSchema,
+    useBody
+  )
+  const data = body.data as CreateUserInput['data']
 
   await doesUserExists(data)
 

@@ -1,9 +1,17 @@
 import { CompatibilityEvent } from 'h3'
 import { findQuestion } from '@/server/db/repositories/questionRepository'
-
+import { validateClientData } from '@/server/utils'
+import {
+  createQuestionSchema,
+  QuestionInput,
+} from '@/server/schema/questionSchema'
 export default defineEventHandler(async (event: CompatibilityEvent) => {
-  const queries = useQuery(event)
-  const questionId = parseInt(queries.id as string)
+  const query = await validateClientData<QuestionInput, typeof useQuery>(
+    event,
+    createQuestionSchema,
+    useQuery
+  )
+  const questionId = query.id
   const question = await findQuestion(questionId)
   if (!question) {
     sendError(

@@ -9,7 +9,6 @@
         </h1>
       </div>
     </div>
-    <QuestionSidebar />
     <div class="container mx-auto">
       <QuestionBox :post="question" type="question">
         <div v-if="isMine && showEditForm === false" class="mt-5">
@@ -61,7 +60,6 @@
 <script setup lang="ts">
 import { IAnswer } from '@/types/IAnswer'
 import { IQuestion } from '@/types/IQuestion'
-import QuestionSidebar from '~/components/question/QuestionSidebar.vue'
 import QuestionAnswerForm from '~/components/question/QuestionAnswerForm.vue'
 import QuestionForm from '~~/components/question/QuestionForm.vue'
 import QuestionBox from '~/components/question/QuestionBox.vue'

@@ -1,12 +1,14 @@
 <template>
-  <div class="test">
-    <div class="flex m-5 justify-center">
-      <label
-        for="search-dropdown"
-        class="mb-2 text-sm font-medium text-slate-900 sr-only dark:text-gray-300"
-        >Search Questions</label
-      >
+  <div>
+    <div
+      class="flex flex-col m-5 justify-center items-center gap-5 max-w-md md:max-w-2xl mx-auto my-10"
+    >
       <div class="w-3/4">
+        <label
+          for="search-dropdown"
+          class="mb-2 text-sm font-medium text-slate-900 sr-only dark:text-gray-300"
+          >Search Questions</label
+        >
         <input
           id="search-dropdown"
           v-model="searchInput"
@@ -15,52 +17,30 @@
           placeholder="Search Questions..."
         />
       </div>
+      <NuxtLink
+        to="/ask-question/ask"
+        type="button"
+        class="w-3/4 text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+      >
+        Ask Question
+      </NuxtLink>
     </div>
-    <TransitionGroup
-      name="list"
-      tag="ul"
-      enter-from-class="opacity-0"
-      leave-to-class="opacity-0"
-      enter-active-class="transition duration-200"
-      leave-active-class="transition duration-200"
-    >
+    <div></div>
+    <ul class="pb-2">
       <li v-for="question in questions.result" :key="question.id">
-        <NuxtLink v-if="question" :to="`/ask-question/question/${question.id}`">
-          <QuestionBox :post="question" type="question" />
-        </NuxtLink>
-      </li>
-      <li
-        v-for="(placeholder, index) in Array.from(Array(4).keys())"
-        :key="`{${placeholder}-${index}`"
-      >
-        <QuestionSkeletonBox />
-      </li>
-    </TransitionGroup>
-    <div class="text-white">{{ pending }}</div>
-    <!-- <TransitionGroup
-      tag="ul"
-      enter-from-class="opacity-0"
-      leave-to-class="opacity-0"
-      enter-active-class="transition duration-200"
-      leave-active-class="transition duration-200"
-    >
-      <li
-        v-for="(question, index) in questions.result"
-        :key="`${question.id}-${index}`"
-      >
         <NuxtLink v-if="question" :to="`/ask-question/question/${question.id}`">
           <QuestionBox :post="question" type="question" />
         </NuxtLink>
       </li>
       <template v-if="pending">
         <li
-          v-for="(placeholder, index) in Array.from(Array(4).keys())"
+          v-for="(placeholder, index) in placeholderArray"
           :key="`{${placeholder}-${index}`"
         >
           <QuestionSkeletonBox />
         </li>
       </template>
-    </TransitionGroup> -->
+    </ul>
   </div>
 </template>
 
@@ -72,6 +52,8 @@ import QuestionSkeletonBox from './QuestionSkeletonBox.vue'
 import { ISearch } from '@/types/ISearch'
 import { useDebounceOnRef } from '@/composables/useDebounce'
 const searchInput = useDebounceOnRef('', 1000)
+
+const placeholderArray = Array.from(Array(4).keys())
 
 const questions = reactive<ISearch>({
   result: [],

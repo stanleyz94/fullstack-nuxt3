@@ -1,25 +1,20 @@
-import { object, string, TypeOf, number } from 'zod'
+import { object, string, TypeOf } from 'zod'
+import { transformToInt } from '@/server/utils'
 
 export const createSearchSchema = object({
-  query: object({
-    search: string({
-      required_error: 'Search is required',
-      invalid_type_error: 'Search must be a string',
-    }),
-    take: number({
-      required_error: 'Take is required',
-      invalid_type_error: 'Take must be a number',
-    }),
-    cursor: number({
-      required_error: 'Cursor is required',
-      invalid_type_error: 'Cursor must be a number or null',
-    }).nullable(),
-    test: number().nullable(),
+  search: string({
+    required_error: 'Search is required',
+  }),
+  take: string({
+    required_error: 'Take is required',
+  })
+    .min(1)
+    .transform(transformToInt),
+  cursor: string({
+    required_error: 'Cursor is required',
   }),
 })
-
 type DeepRequired<T> = Required<{ [P in keyof T]: DeepRequired<T[P]> }>
 export type QuestionSearchInput = DeepRequired<
   TypeOf<typeof createSearchSchema>
 >
-// type Test = TypeOf<typeof createSearchSchema>

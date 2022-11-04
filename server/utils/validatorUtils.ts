@@ -5,20 +5,19 @@ import {
   CipherGCMTypes,
 } from 'crypto'
 import { AnyZodObject } from 'zod'
-import { CompatibilityEvent } from 'h3'
-
+import type { CompatibilityEvent } from 'h3'
 const config = useRuntimeConfig()
 const encryptionKey = config.private.encryptionKey
 const algorithm: CipherGCMTypes = 'aes-256-gcm'
 
-export async function validateBody<T>(
-  event: CompatibilityEvent,
-  schema: AnyZodObject
-): Promise<T> {
-  const body = await useBody(event)
+export async function validateClientData<
+  T,
+  F extends typeof useBody | typeof useQuery
+>(event: CompatibilityEvent, schema: AnyZodObject, useFn: F): Promise<T> {
+  const params = await useFn(event)
   try {
-    schema.parse(body)
-    return body
+    const parsedData = schema.parse(params)
+    return parsedData as T
   } catch (e: any) {
     throw createError({
       statusCode: 400,

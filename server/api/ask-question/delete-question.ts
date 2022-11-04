@@ -3,7 +3,7 @@ import {
   deleteQuestion,
   findQuestion,
 } from '@/server/db/repositories/questionRepository'
-import { getUserBySessionToken } from '~~/server/services/sessionService'
+import { getUserBySessionToken } from '@/server/services/sessionService'
 
 export default defineEventHandler(async (event: CompatibilityEvent) => {
   const body = await useBody(event)

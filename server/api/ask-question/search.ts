@@ -1,24 +1,32 @@
 import { CompatibilityEvent } from 'h3'
 import { searchQuestions } from '@/server/db/repositories/questionRepository'
-import { useCryptCursor } from '@/server/utils'
+import { useCryptCursor, validateClientData } from '@/server/utils'
+import {
+  createSearchSchema,
+  QuestionSearchInput,
+} from '@/server/schema/searchSchema'
 
 export default defineEventHandler(async (event: CompatibilityEvent) => {
-  const query = useQuery(event)
+  const query = await validateClientData<QuestionSearchInput, typeof useQuery>(
+    event,
+    createSearchSchema,
+    useQuery
+  )
   const { encryptCursor, decryptCursor } = useCryptCursor()
   let decodedCursor = null
-  const search = query.search as string
-  const take = parseInt(query.take as string)
+  const search = query.search
+  const take = query.take
   const cursor = query.cursor
-
   if (cursor) {
-    decodedCursor = parseInt(decryptCursor(cursor as string))
+    decodedCursor = parseInt(decryptCursor(cursor))
   }
 
   const result = await searchQuestions({
     search,
-    take: 4,
+    take,
     cursor: decodedCursor,
   })
+
   const hasMoreResults = result.length === take
 
   let nextCursor = null
