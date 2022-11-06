@@ -44,6 +44,12 @@ export async function createUser(data: IUser) {
   return user
 }
 
+export async function createManyUsers(data: IUser[]) {
+  return await prisma.user.createMany({
+    data,
+  })
+}
+
 export async function getUserById(id: number): Promise<IUser> {
   return await prisma.user.findUnique({
     where: {

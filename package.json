@@ -11,6 +11,7 @@
     "format-check": "npx prettier --check ./"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@nuxtjs/color-mode": "^3.1.5",
     "@nuxtjs/eslint-config-typescript": "^11.0.0",
     "@nuxtjs/tailwindcss": "^5.3.3",
