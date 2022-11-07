@@ -1,5 +1,5 @@
 import { object, string, TypeOf } from 'zod'
-import { transformToInt } from '@/server/utils'
+import { transformToInt } from '@/server/utils/schemaUtils'
 
 export const createQuestionSchema = object({
   id: string({

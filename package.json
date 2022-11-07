@@ -39,6 +39,6 @@
   },
   "prisma": {
     "schema": "server/db/schema.prisma",
-    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} server/db/seed.ts"
+    "seed": "ts-node --transpile-only --compiler-options {\"module\":\"CommonJS\"} server/db/seed.ts"
   }
 }

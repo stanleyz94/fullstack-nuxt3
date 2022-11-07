@@ -4,7 +4,7 @@ import { IUser } from '@/types/IUser'
 import { doesUserExists } from '@/server/services/userService'
 import { createUser } from '@/server/db/repositories/userRepository'
 import { makeSession } from '@/server/services/sessionService'
-import { validateClientData } from '@/server/utils'
+import { validateClientData } from '@/server/utils/validatorUtils'
 import { CreateUserInput, createUserSchema } from '@/server/schema/userSchema'
 
 export default async (event: CompatibilityEvent) => {

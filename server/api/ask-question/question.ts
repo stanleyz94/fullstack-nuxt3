@@ -1,6 +1,6 @@
 import { CompatibilityEvent } from 'h3'
 import { findQuestion } from '@/server/db/repositories/questionRepository'
-import { validateClientData } from '@/server/utils'
+import { validateClientData } from '@/server/utils/validatorUtils'
 import {
   createQuestionSchema,
   QuestionInput,

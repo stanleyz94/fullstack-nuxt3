@@ -1,6 +1,9 @@
 import { CompatibilityEvent } from 'h3'
 import { searchQuestions } from '@/server/db/repositories/questionRepository'
-import { useCryptCursor, validateClientData } from '@/server/utils'
+import {
+  useCryptCursor,
+  validateClientData,
+} from '@/server/utils/validatorUtils'
 import {
   createSearchSchema,
   QuestionSearchInput,
