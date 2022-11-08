@@ -47,7 +47,7 @@ const data: IAnswerPost = reactive({
 const showAnswerForm = useState('showAnswerForm' + props.questionId)
 const postAnswer = async () => {
   const answer = await useFetch(() => `/api/ask-question/answer`, {
-    method: 'post',
+    method: 'POST',
     body: { data },
   })
   const newAnswer = useState('newAnswer')

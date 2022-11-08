@@ -5,7 +5,7 @@ import {
   CipherGCMTypes,
 } from 'crypto'
 import { AnyZodObject } from 'zod'
-import type { CompatibilityEvent } from 'h3'
+import { type CompatibilityEvent } from 'h3'
 const config = useRuntimeConfig()
 const encryptionKey = config.private.encryptionKey
 const algorithm: CipherGCMTypes = 'aes-256-gcm'

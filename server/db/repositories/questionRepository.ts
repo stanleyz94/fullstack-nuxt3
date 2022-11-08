@@ -76,10 +76,10 @@ export async function searchQuestions({
     where: {
       OR: [
         {
-          title: { contains: search },
+          title: { contains: search, mode: 'insensitive' },
         },
         {
-          description: { contains: search },
+          description: { contains: search, mode: 'insensitive' },
         },
       ],
     },

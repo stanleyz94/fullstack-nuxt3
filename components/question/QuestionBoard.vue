@@ -46,7 +46,8 @@
 
 <script setup lang="ts">
 import { useInfiniteScroll } from '@vueuse/core'
-import type { UseFetchOptions } from '#app'
+import { type UseFetchOptions } from '#app'
+import { type FetchOptions } from 'ohmyfetch'
 import QuestionBox from './QuestionBox.vue'
 import QuestionSkeletonBox from './QuestionSkeletonBox.vue'
 import { ISearch } from '@/types/ISearch'
@@ -66,7 +67,6 @@ const assignNewQuestions = (newQuestions: ISearch) => {
   const newResults = newQuestions.result || []
   const searchedWordIsNotSame =
     searchInput.value !== questions.meta?.searchedWord
-
   if (searchedWordIsNotSame) {
     questions.result.splice(0, questions.result.length, ...newResults)
   } else {
@@ -74,6 +74,15 @@ const assignNewQuestions = (newQuestions: ISearch) => {
   }
   questions.meta.searchedWord = newQuestions.meta?.searchedWord || ''
   questions.meta.nextCursor = newQuestions.meta?.nextCursor || ''
+}
+const assignCursor = (options: FetchOptions) => {
+  const searchedWordIsNotSame =
+    searchInput.value !== questions.meta?.searchedWord
+  if (searchedWordIsNotSame) {
+    options.params.cursor = ''
+  } else {
+    options.params.cursor = questions.meta.nextCursor
+  }
 }
 
 const searchOptions: UseFetchOptions<ISearch> = {
@@ -84,14 +93,16 @@ const searchOptions: UseFetchOptions<ISearch> = {
   initialCache: false,
 }
 const searchInterceptors: UseFetchOptions<ISearch> = {
+  onRequest({ options }) {
+    assignCursor(options)
+  },
   onResponse({ response }) {
     assignNewQuestions(response._data)
   },
 }
 
 const { pending, refresh } = await useFetch<ISearch>(
-  () =>
-    `/api/ask-question/search?search=${searchInput.value}&cursor=${questions.meta.nextCursor}`,
+  () => `/api/ask-question/search?search=${searchInput.value}`,
   {
     ...searchOptions,
     ...searchInterceptors,
