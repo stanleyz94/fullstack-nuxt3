@@ -1,4 +1,5 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
+import { checkEnv } from './hooks/checkEnv'
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
   tailwindcss: {
@@ -22,7 +23,9 @@ export default defineNuxtConfig({
       appDomain: process.env.APP_DOMAIN,
     },
   },
-  //   typescript: {
-  //     strict: true,
-  //   },
+  hooks: {
+    'build:before'() {
+      checkEnv()
+    },
+  },
 })
