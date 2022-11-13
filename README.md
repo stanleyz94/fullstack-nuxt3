@@ -1,4 +1,30 @@
-### Setup
+# Simple CRUD Fullstack application with Nuxt3
+
+
+## About
+
+
+The idea of this project was to build simple CRUD Fullstack application with Nuxt3 which shows shows a list of questions with answers.
+
+The application includes basic CRUD operations which creates, reads, updates and also deletes questions/answers.
+Registered users can only have access to perform the above operations, so the application also includes basic authorization and authentication.
+
+To implement page of questions, application use cursor pagination which returns a pointer to a specific item in the dataset. Cursor is encrypted to indicate that pointer supposed to be opaque and details of their implementation unavailable to a user.
+
+Application also includes some Stripe subscriptions to charge a registered user for access to some special resources (which are not available but the basic subscription system itself exists).
+
+
+### Project stack
+
+- Nuxt 3.0.0-rc.10
+- Typescript ^4.8.4
+- Tailwind
+- PostgreSQL
+- Prisma
+- Zod
+
+
+## Project Setup
 
 In your terminal
 
@@ -17,45 +43,3 @@ You can optionally populate database with some data (fake users, questions, answ
 
 
 
-# Nuxt 3 Minimal Starter
-
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
-
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
